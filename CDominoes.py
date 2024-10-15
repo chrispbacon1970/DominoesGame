@@ -24,7 +24,8 @@ class CDominoes:
                 self.boneyard.append(new_domino)
 
     def play_domino(self, domino):
-        if self.board[0].back == domino.front: #
+        #Play a domino and return if it was able to be played
+        if self.board[0].back == domino.front:
             self.board.insert(0, domino)
             return True # can place domino on board
         elif self.board[0].front == domino.back:
