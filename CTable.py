@@ -5,5 +5,7 @@ class CTable():
     def __init__(self):
         pass
 
-    def display(self, board):
-        pass
+    def display(self, table):
+        board = table.board
+        for i in board:
+            print(f"[{i.back}|{i.front}]", end=" ")
