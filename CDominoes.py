@@ -5,12 +5,10 @@ class Domino:
         self.front = front
         self.back = back
     def flip(self): # flips the domino
-        print("flipping domino")
         a = self.front
         self.front = self.back
         self.back = a
-    #def __repr__(self):
-    #    print(f"[{self.front}|{self.back}]")
+
 
 
 #Class CDominoes to contain the data structure with pieces;
@@ -35,7 +33,7 @@ class CDominoes:
             return "Empty"
 
     def play_domino(self, domino):
-        print(self.board, domino.front, domino.back)
+        print(f"I'm attempting to play [{domino.front}|{domino.back}]")
         #Play a domino and return if it was able to be played
         if len(self.board) == 0: # if the board is empty, the domino will be the first
             self.board.append(domino)
@@ -46,14 +44,14 @@ class CDominoes:
             self.board.insert(0, domino)
             return True # can place domino on board
         elif self.board[0].back == domino.back:
-            domino = domino.flip()
+            domino.flip()
             self.board.insert(0, domino)
             return True  # can place domino on board
         elif self.board[len(self.board)-1].front == domino.back:
             self.board.append(domino)
             return True  # can place domino on board
         elif self.board[len(self.board)-1].front == domino.front:
-            domino = domino.flip()
+            domino.flip()
             self.board.append(domino)
             return True  # can place domino on board
         else:

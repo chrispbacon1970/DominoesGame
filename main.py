@@ -25,7 +25,7 @@ else:
 won = False
 round = 1 # odd rounds will be the first player, evens will be the second
 while won == False:
-    #print(f"round {round}. board {len(domino_game.board)}. boneyard {len(domino_game.boneyard)}")
+    print(f"round {round}. board {len(domino_game.board)}. boneyard {len(domino_game.boneyard)}")
     result = PlayerOrder[round%2].play(domino_game)
     if result == "Won":
         print(f"{round%2} won!")
