@@ -11,8 +11,6 @@ class CRandom():
         player1_deck = []
         player2_deck = []
         for i in range(0,20):
-            #print(len(boneyard))
-            #drawn_domino = boneyard[random.randint(0, len(boneyard)-1)]
             drawn_domino = random.choice(boneyard)
             boneyard.remove(drawn_domino)
             if i%2 == 0:

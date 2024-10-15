@@ -49,7 +49,6 @@ class CDominoes:
 
         # Find each player's biggest double if it exists
         for i in Player1.pieces:
-            #print(i)
             if i.front == i.back:
                 if BiggestDouble == None:
                     BiggestDouble = i.front
@@ -59,7 +58,6 @@ class CDominoes:
                         BiggestDouble = i.front
                         PlayerWithBiggestDouble = 1
         for i in Player2.pieces:
-            #print(i)
             if i.front == i.back:
                 if BiggestDouble == None:
                     BiggestDouble = i.front
@@ -69,11 +67,10 @@ class CDominoes:
                         BiggestDouble = i.front
                         PlayerWithBiggestDouble = 2
 
-        #Neither had a double
+        #Neither has a double condition
         if BiggestDouble == None:
             numberDrawn = 1 # increment each withdraw from boneyard. odd will be 1's turn, even will be 2's
-            while PlayerWithBiggestDouble == None:
-                #drawnDomino = self.boneyard[0, len(self.boneyard)-1]
+            while PlayerWithBiggestDouble == None: # keep drawing until a double is found
                 drawnDomino = random.choice(self.boneyard)
                 self.boneyard.remove(drawnDomino)
                 if drawnDomino.front == drawnDomino.back:
@@ -84,8 +81,6 @@ class CDominoes:
                         PlayerWithBiggestDouble = 2
                         break
                 else:
-                    numberDrawn += 1
-
-
+                    numberDrawn += 1 # increase the number of dominos drawn
 
         return PlayerWithBiggestDouble
