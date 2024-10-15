@@ -4,6 +4,7 @@ class Domino:
         #back is the left, right is the front
         self.front = front
         self.back = back
+
     def flip(self): # flips the domino
         a = self.front
         self.front = self.back

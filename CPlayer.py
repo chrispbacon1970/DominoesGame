@@ -26,4 +26,3 @@ class CPlayer():
                 return "Played"
             else:
                 self.pieces.append(new_domino)
-
