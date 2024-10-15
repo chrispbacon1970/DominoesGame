@@ -1,3 +1,4 @@
+import random
 class Domino:
     def __init__(self, front, back):
         self.front = front
@@ -41,3 +42,50 @@ class CDominoes:
             return True  # can place domino on board
         else:
             return False # Cannot place domino
+
+    def determine_first(self, Player1, Player2):
+        BiggestDouble = None
+        PlayerWithBiggestDouble = None
+
+        # Find each player's biggest double if it exists
+        for i in Player1.pieces:
+            #print(i)
+            if i.front == i.back:
+                if BiggestDouble == None:
+                    BiggestDouble = i.front
+                    PlayerWithBiggestDouble = 1
+                else:
+                    if i.front > BiggestDouble:
+                        BiggestDouble = i.front
+                        PlayerWithBiggestDouble = 1
+        for i in Player2.pieces:
+            #print(i)
+            if i.front == i.back:
+                if BiggestDouble == None:
+                    BiggestDouble = i.front
+                    PlayerWithBiggestDouble = 2
+                else:
+                    if i.front > BiggestDouble:
+                        BiggestDouble = i.front
+                        PlayerWithBiggestDouble = 2
+
+        #Neither had a double
+        if BiggestDouble == None:
+            numberDrawn = 1 # increment each withdraw from boneyard. odd will be 1's turn, even will be 2's
+            while PlayerWithBiggestDouble == None:
+                #drawnDomino = self.boneyard[0, len(self.boneyard)-1]
+                drawnDomino = random.choice(self.boneyard)
+                self.boneyard.remove(drawnDomino)
+                if drawnDomino.front == drawnDomino.back:
+                    if numberDrawn % 2 == 1: # determine who's turn it is that got a double
+                        PlayerWithBiggestDouble = 1
+                        break
+                    else:
+                        PlayerWithBiggestDouble = 2
+                        break
+                else:
+                    numberDrawn += 1
+
+
+
+        return PlayerWithBiggestDouble

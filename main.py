@@ -8,3 +8,6 @@ Random = CRandom.CRandom()
 decks = Random.deal(domino_game)
 Player1.set_deck(decks[0])
 Player2.set_deck(decks[0])
+
+firstPlayer = domino_game.determine_first(Player1, Player2)
+print(firstPlayer)
