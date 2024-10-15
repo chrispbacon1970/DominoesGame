@@ -9,7 +9,21 @@ class CPlayer():
 
     def set_deck(self, deck):
         self.pieces = deck
-    def play(self):
-        selected_domino = self.pieces[random.randint(0, len(self.pieces))]
-        self.pieces.remove(selected_domino)
-        return selected_domino
+    def play(self, table): # plays any domino that works on the board
+        if len(self.pieces) == 0:
+            return "Won"
+        for i in self.pieces:
+            if table.play_domino == True:
+                self.pieces.remove(i)
+                return "Played"
+        dominoFound = False
+        while dominoFound == False:
+            new_domino = table.withdraw_domino()
+            if new_domino == "Empty":
+                print("Uh oh")
+                exit()
+            if table.play_domino(new_domino) == True:
+                return "Played"
+            else:
+                self.pieces.append(new_domino)
+

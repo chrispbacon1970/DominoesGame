@@ -1,9 +1,11 @@
 import random
 class Domino:
     def __init__(self, front, back):
+        #back is the left, right is the front
         self.front = front
         self.back = back
     def flip(self): # flips the domino
+        print("flipping domino")
         a = self.front
         self.front = self.back
         self.back = a
@@ -24,19 +26,33 @@ class CDominoes:
                 new_domino = Domino(x, y)
                 self.boneyard.append(new_domino)
 
+    def withdraw_domino(self):
+        if len(self.boneyard) != 0:
+            selectedDomino = random.choice(self.boneyard)
+            self.boneyard.remove(selectedDomino)
+            return selectedDomino
+        else:
+            return "Empty"
+
     def play_domino(self, domino):
+        print(self.board, domino.front, domino.back)
         #Play a domino and return if it was able to be played
+        if len(self.board) == 0: # if the board is empty, the domino will be the first
+            self.board.append(domino)
+            return True
+
+        #back is the left, right is the front
         if self.board[0].back == domino.front:
             self.board.insert(0, domino)
             return True # can place domino on board
-        elif self.board[0].front == domino.back:
+        elif self.board[0].back == domino.back:
             domino = domino.flip()
             self.board.insert(0, domino)
             return True  # can place domino on board
-        elif self.board[len(self.board)-1] == domino.front:
+        elif self.board[len(self.board)-1].front == domino.back:
             self.board.append(domino)
             return True  # can place domino on board
-        elif self.board[len(self.board)-1] == domino.back:
+        elif self.board[len(self.board)-1].front == domino.front:
             domino = domino.flip()
             self.board.append(domino)
             return True  # can place domino on board
@@ -84,3 +100,5 @@ class CDominoes:
                     numberDrawn += 1 # increase the number of dominos drawn
 
         return PlayerWithBiggestDouble
+
+    #def
