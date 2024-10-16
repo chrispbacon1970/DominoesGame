@@ -50,8 +50,9 @@ while won == False:
     if Player1.skipped == True and Player2.skipped == True:
         TableRenderer.tie(Player1, Player2, domino_game)
         exit()
-    TableRenderer.display(domino_game)
+    TableRenderer.display(domino_game, round)
     TableRenderer.displayhand(Player1, Player2)
     round += 1
+
 # Display the final result
 TableRenderer.display_final_result(PlayerOrder, domino_game)

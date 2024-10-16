@@ -11,14 +11,14 @@ class CTable:
     def display_boneyard(self, table):
         print("Available pieces:", [f"[{p.front}|{p.back}]" for p in table.boneyard])
 
-    def display(self, table):
-        print("\n=== Current Table ===")
+    def display(self, table, round):
+        print(f"\n=== Round {round} Table ===")
         for i in table.board:
             print(f"[{i.back}|{i.front}]", end=" ")
         print()
 
     def tie(self, Player1, Player2, table):
-        print("\n===Final Result ===")
+        print("\n=== Final Result ===")
         print("The game resulted in a tie!")
         print("Player 1's hand:", [f"[{p.front}|{p.back}]" for p in Player1.pieces])
         print("Player 2's hand:", [f"[{p.front}|{p.back}]" for p in Player2.pieces])
