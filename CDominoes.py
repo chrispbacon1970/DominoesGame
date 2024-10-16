@@ -1,6 +1,6 @@
 import random
 class Domino:
-    def __init__(self, front, back):
+    def __init__(self, front, back): # Initialize the domino
         #back is the left, right is the front
         self.front = front
         self.back = back
@@ -14,7 +14,7 @@ class Domino:
 
 #Class CDominoes to contain the data structure with pieces;
 class CDominoes:
-    def __init__(self):
+    def __init__(self): # Initialize the board and boneyard
         self.boneyard = []
         self.board = []
 
@@ -25,63 +25,44 @@ class CDominoes:
                 new_domino = Domino(x, y)
                 self.boneyard.append(new_domino)
 
-    def withdraw_domino(self):
-        if len(self.boneyard) != 0:
+    def withdraw_domino(self): # Takes a domino from the boneyard
+        if len(self.boneyard) != 0: #  if the boneyard is not empty, select, remove, and return a random domino
             selectedDomino = random.choice(self.boneyard)
             self.boneyard.remove(selectedDomino)
             return selectedDomino
         else:
-            return "Empty"
+            return "Empty" # Boneyard is empty
 
-    def play_domino(self, domino):
-        #Play a domino and return if it was able to be played
+    def play_domino(self, domino): #Play a domino and return if it was able to be played
         if len(self.board) == 0: # if the board is empty, the domino will be the first
             self.board.append(domino)
             return True
 
-        #back is the left, right is the front
-        '''if self.board[0].back == domino.front:
-            self.board.insert(0, domino)
-            return True # can place domino on board
-        elif self.board[0].back == domino.back:
-            domino.flip()
+        #back is the left, right is the front of the domino
+        if self.board[0].back == domino.front: # if there is a back match
             self.board.insert(0, domino)
             return True  # can place domino on board
-        elif self.board[len(self.board)-1].front == domino.back:
-            self.board.append(domino)
-            return True  # can place domino on board
-        elif self.board[len(self.board)-1].front == domino.front:
-            domino.flip()
+        elif self.board[len(self.board) - 1].front == domino.back: # if there is a front match
             self.board.append(domino)
             return True  # can place domino on board
         else:
-            return False # Cannot place domino'''
-
-
-        if self.board[0].back == domino.front:
-            self.board.insert(0, domino)
-            return True  # can place domino on board
-        elif self.board[len(self.board) - 1].front == domino.back:
-            self.board.append(domino)
-            return True  # can place domino on board
-        else:
-            domino.flip()
-            if self.board[0].back == domino.front:
+            domino.flip() # flip the domino
+            if self.board[0].back == domino.front: # if there is a back match
                 self.board.insert(0, domino)
                 return True  # can place domino on board
-            elif self.board[len(self.board) - 1].front == domino.back:
+            elif self.board[len(self.board) - 1].front == domino.back: # if there is a front match
                 self.board.append(domino)
                 return True  # can place domino on board
             else:
-                domino.flip()
-                return False
+                domino.flip() # Flip the domino back to original state
+                return False # Cannot play the domino
 
-    def determine_first(self, Player1, Player2):
+    def determine_first(self, Player1, Player2): # Determines which player goes first
         BiggestDouble = None
         PlayerWithBiggestDouble = None
 
         # Find each player's biggest double if it exists
-        for i in Player1.pieces:
+        for i in Player1.pieces: # Find player 1's biggest double
             if i.front == i.back:
                 if BiggestDouble == None:
                     BiggestDouble = i.front
@@ -90,7 +71,7 @@ class CDominoes:
                     if i.front > BiggestDouble:
                         BiggestDouble = i.front
                         PlayerWithBiggestDouble = 1
-        for i in Player2.pieces:
+        for i in Player2.pieces: # Find player 2's biggest double
             if i.front == i.back:
                 if BiggestDouble == None:
                     BiggestDouble = i.front
@@ -104,7 +85,7 @@ class CDominoes:
         if BiggestDouble == None:
             numberDrawn = 1 # increment each withdraw from boneyard. odd will be 1's turn, even will be 2's
             while PlayerWithBiggestDouble == None: # keep drawing until a double is found
-                drawnDomino = random.choice(self.boneyard)
+                drawnDomino = random.choice(self.boneyard) # take a domino from the boneyard
                 self.boneyard.remove(drawnDomino)
                 if drawnDomino.front == drawnDomino.back:
                     if numberDrawn % 2 == 1: # determine who's turn it is that got a double
@@ -117,5 +98,3 @@ class CDominoes:
                     numberDrawn += 1 # increase the number of dominos drawn
 
         return PlayerWithBiggestDouble
-
-    #def

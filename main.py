@@ -21,6 +21,7 @@ TableRenderer = CTable.CTable()
 TableRenderer.displayhand(Player1, Player2)
 TableRenderer.display_boneyard(domino_game)
 
+# Determind first player
 firstPlayer = domino_game.determine_first(Player1, Player2)
 if firstPlayer == Player2:
     offset = 1
@@ -28,7 +29,7 @@ else:
     offset = 0
 print(f"first player is: Player{firstPlayer}")
 
-# Determine the first player
+# Setup the array for players
 PlayerOrder = []
 if firstPlayer == 1:
     PlayerOrder.insert(0,Player1)
@@ -39,19 +40,18 @@ else:
 
 won = False
 round = 1 # odd rounds will be the first player, evens will be the second
+
 # Game loop
 while won == False:
-    #print(f"round {round}. Player{(round+offset)%2+1}'s turn board {len(domino_game.board)}. boneyard {len(domino_game.boneyard)}")
-    print(f"Round: {round}. Player {(round+offset)%2+1}'s turn")
+    print(f"Player {(round+offset)%2+1}'s turn") # Announce who's turn it is
     result = PlayerOrder[round%2].play(domino_game)
     if result == "Won":
-        #print(f"{(round+offset)%2+1} won!")
-        break
-    if Player1.skipped == True and Player2.skipped == True:
-        TableRenderer.tie(Player1, Player2, domino_game)
+        break # exit the loop to the final display
+    if Player1.skipped == True and Player2.skipped == True: # if tied, special tie condition
+        TableRenderer.tie(Player1, Player2, domino_game) # Show the tie
         exit()
-    TableRenderer.display(domino_game, round)
-    TableRenderer.displayhand(Player1, Player2)
+    TableRenderer.display(domino_game, round) # Display the board
+    TableRenderer.displayhand(Player1, Player2) # Display the hands
     round += 1
 
 # Display the final result
