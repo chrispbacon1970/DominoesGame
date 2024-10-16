@@ -41,13 +41,17 @@ won = False
 round = 1 # odd rounds will be the first player, evens will be the second
 # Game loop
 while won == False:
-    print(f"round {round}. Player{(round+offset)%2+1}'s turn board {len(domino_game.board)}. boneyard {len(domino_game.boneyard)}")
+    #print(f"round {round}. Player{(round+offset)%2+1}'s turn board {len(domino_game.board)}. boneyard {len(domino_game.boneyard)}")
+    print(f"Round: {round}. Player {(round+offset)%2+1}'s turn")
     result = PlayerOrder[round%2].play(domino_game)
     if result == "Won":
-        print(f"{(round+offset)%2+1} won!")
+        #print(f"{(round+offset)%2+1} won!")
+        break
+    if Player1.skipped == True and Player2.skipped == True:
+        TableRenderer.tie(Player1, Player2, domino_game)
         exit()
     TableRenderer.display(domino_game)
     TableRenderer.displayhand(Player1, Player2)
     round += 1
 # Display the final result
-TableRenderer.display_final_result(PlayerOrder)
+TableRenderer.display_final_result(PlayerOrder, domino_game)

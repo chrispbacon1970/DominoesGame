@@ -6,10 +6,12 @@ import random, CDominoes
 class CPlayer():
     def __init__(self):
         self.pieces = []
+        self.skipped = False
 
     def set_deck(self, deck):
         self.pieces = deck
     def play(self, table): # plays any domino that works on the board
+        self.skipped = False
         if len(self.pieces) == 0:
             return "Won"
         for i in self.pieces:
@@ -25,6 +27,7 @@ class CPlayer():
             new_domino = table.withdraw_domino()
             if new_domino == "Empty":
                 print("The boneyard is empty when attempting to withdraw another domino. Skipping...")
+                self.skipped = True
                 return
             if table.play_domino(new_domino) == True:
                 return "Played"
