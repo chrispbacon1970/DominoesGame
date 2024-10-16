@@ -13,9 +13,13 @@ class CPlayer():
         if len(self.pieces) == 0:
             return "Won"
         for i in self.pieces:
-            if table.play_domino == True:
+            print(f"CPlayer: In deck, I'm trying [{i.front}|{i.back}]")
+            if table.play_domino(i) == True:
+                print("success")
                 self.pieces.remove(i)
                 return "Played"
+            else:
+                print(f"failed to play the tried card {print(table.play_domino(i))}")
         dominoFound = False
         while dominoFound == False:
             new_domino = table.withdraw_domino()

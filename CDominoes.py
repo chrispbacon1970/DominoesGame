@@ -34,14 +34,13 @@ class CDominoes:
             return "Empty"
 
     def play_domino(self, domino):
-        print(f"I'm attempting to play [{domino.front}|{domino.back}]")
         #Play a domino and return if it was able to be played
         if len(self.board) == 0: # if the board is empty, the domino will be the first
             self.board.append(domino)
             return True
 
         #back is the left, right is the front
-        if self.board[0].back == domino.front:
+        '''if self.board[0].back == domino.front:
             self.board.insert(0, domino)
             return True # can place domino on board
         elif self.board[0].back == domino.back:
@@ -56,7 +55,28 @@ class CDominoes:
             self.board.append(domino)
             return True  # can place domino on board
         else:
-            return False # Cannot place domino
+            return False # Cannot place domino'''
+
+
+        if self.board[0].back == domino.front:
+            self.board.insert(0, domino)
+            return True  # can place domino on board
+        elif self.board[len(self.board) - 1].front == domino.back:
+            self.board.append(domino)
+            return True  # can place domino on board
+        else:
+            domino.flip()
+            if self.board[0].back == domino.front:
+                self.board.insert(0, domino)
+                return True  # can place domino on board
+            elif self.board[len(self.board) - 1].front == domino.back:
+                self.board.append(domino)
+                return True  # can place domino on board
+            else:
+                domino.flip()
+                print(f"Failed because {self.board[0].back} != {domino.back} or {domino.front} ||||| {self.board[len(self.board) - 1].front} != {domino.back} or {domino.front}")
+                return False
+        #return None # idk how we got here
 
     def determine_first(self, Player1, Player2):
         BiggestDouble = None
