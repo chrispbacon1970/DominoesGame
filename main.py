@@ -44,7 +44,7 @@ while won == False:
     print(f"round {round}. Player{(round+offset)%2+1}'s turn board {len(domino_game.board)}. boneyard {len(domino_game.boneyard)}")
     result = PlayerOrder[round%2].play(domino_game)
     if result == "Won":
-        print(f"{round%2} won!")
+        print(f"{(round+offset)%2+1} won!")
         exit()
     TableRenderer.display(domino_game)
     TableRenderer.displayhand(Player1, Player2)

@@ -25,7 +25,7 @@ class CPlayer():
             new_domino = table.withdraw_domino()
             if new_domino == "Empty":
                 print("The boneyard is empty when attempting to withdraw another domino. Terminating...")
-                exit()
+                return
             if table.play_domino(new_domino) == True:
                 return "Played"
             else:
