@@ -34,6 +34,8 @@ class CDominoes:
             return "Empty" # Boneyard is empty
 
     def play_domino(self, domino): #Play a domino and return if it was able to be played
+        print(f"I'm attempting to play [{domino.front}|{domino.back}]")
+        #Play a domino and return if it was able to be played
         if len(self.board) == 0: # if the board is empty, the domino will be the first
             self.board.append(domino)
             return True
