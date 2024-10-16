@@ -74,9 +74,7 @@ class CDominoes:
                 return True  # can place domino on board
             else:
                 domino.flip()
-                #print(f"Failed because {self.board[0].back} != {domino.back} or {domino.front} ||||| {self.board[len(self.board) - 1].front} != {domino.back} or {domino.front}")
                 return False
-        #return None # idk how we got here
 
     def determine_first(self, Player1, Player2):
         BiggestDouble = None
