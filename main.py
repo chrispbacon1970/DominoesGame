@@ -1,4 +1,5 @@
 import CTable, CDominoes, CPlayer, CRandom
+import threading
 
 print("=== Initializing Game ===")
 
@@ -29,6 +30,11 @@ else:
     offset = 0
 print(f"first player is: Player{firstPlayer}")
 
+# Setup the player threads
+#Player1Thread = threading.Thread(target=Player1.play,name="player1", args=(domino_game,))
+#Player2Thread = threading.Thread(target=Player2.play,name="player2", args=(domino_game,))
+
+
 # Setup the array for players
 PlayerOrder = []
 if firstPlayer == 1:
@@ -44,8 +50,20 @@ round = 1 # odd rounds will be the first player, evens will be the second
 # Game loop
 while won == False:
     print(f"Player {(round+offset)%2+1}'s turn") # Announce who's turn it is
-    result = PlayerOrder[round%2].play(domino_game)
-    if result == "Won":
+    #result = PlayerOrder[round%2].play(domino_game)
+    #result = PlayerOrder[round%2].run()
+    if ((round+offset)%2) == 1:
+        player = Player1
+        Player1Thread = threading.Thread(target=Player1.play, name="player1", args=(domino_game,))
+        result = Player1Thread.start()
+        Player1Thread.join()
+    else:
+        player = Player2
+        Player2Thread = threading.Thread(target=Player2.play, name="player2", args=(domino_game,))
+        Player2Thread.start()
+        Player2Thread.join()
+    print(domino_game.status)
+    if domino_game.status == "Won":
         break # exit the loop to the final display
     if Player1.skipped == True and Player2.skipped == True: # if tied, special tie condition
         TableRenderer.tie(Player1, Player2, domino_game) # Show the tie
@@ -53,6 +71,7 @@ while won == False:
     TableRenderer.display(domino_game, round) # Display the board
     TableRenderer.displayhand(Player1, Player2) # Display the hands
     round += 1
+    
 
 # Display the final result
 TableRenderer.display_final_result(PlayerOrder, domino_game)

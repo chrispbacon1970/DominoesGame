@@ -17,6 +17,7 @@ class CDominoes:
     def __init__(self): # Initialize the board and boneyard
         self.boneyard = []
         self.board = []
+        self.status = ""
 
     def create_dominoes(self): # create the dominoes set
         #create the domino set

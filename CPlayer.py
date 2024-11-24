@@ -13,6 +13,7 @@ class CPlayer():
     def play(self, table): # plays any domino that works on the board
         self.skipped = False # Has the player skipped a turn?
         if len(self.pieces) == 0:
+            table.status = "Won"
             return "Won" # won the game
         for i in self.pieces: # Check available pieces
             if table.play_domino(i) == True: # If it can be played
