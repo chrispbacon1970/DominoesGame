@@ -12,13 +12,16 @@ class CPlayer():
         self.pieces = deck
     def play(self, table): # plays any domino that works on the board
         self.skipped = False # Has the player skipped a turn?
-        if len(self.pieces) == 0:
-            table.status = "Won"
-            return "Won" # won the game
+
         for i in self.pieces: # Check available pieces
             if table.play_domino(i) == True: # If it can be played
                 self.pieces.remove(i) # 'Use up' the piece
                 return "Played" # Was able to play the piece
+
+        if len(self.pieces) == 0:
+            table.status = "Won"
+            return "Won" # won the game
+
         # If no working piece found in the deck, draw from boneyard until a working one is found
         dominoFound = False # has the piece been found?
         while dominoFound == False: # Loop until the domino is found

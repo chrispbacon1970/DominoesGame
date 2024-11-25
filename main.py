@@ -45,11 +45,12 @@ else:
     PlayerOrder.insert(1,Player1)
 
 won = False
-round = 1 # odd rounds will be the first player, evens will be the second
+round = 0 # odd rounds will be the first player, evens will be the second
 
 # Game loop
 while won == False:
-    print(f"Player {(round+offset)%2+1}'s turn") # Announce who's turn it is
+    round += 1
+    print(f"This round is player {(round+offset-1)%2+1}'s turn") # Announce who's turn it is
     #result = PlayerOrder[round%2].play(domino_game)
     #result = PlayerOrder[round%2].run()
     if ((round+offset)%2) == 1:
@@ -62,7 +63,8 @@ while won == False:
         Player2Thread = threading.Thread(target=Player2.play, name="player2", args=(domino_game,))
         Player2Thread.start()
         Player2Thread.join()
-    print(domino_game.status)
+
+    print(domino_game.status) # Debug to determine if the current round has a winner.
     if domino_game.status == "Won":
         break # exit the loop to the final display
     if Player1.skipped == True and Player2.skipped == True: # if tied, special tie condition
@@ -70,7 +72,7 @@ while won == False:
         exit()
     TableRenderer.display(domino_game, round) # Display the board
     TableRenderer.displayhand(Player1, Player2) # Display the hands
-    round += 1
+
     
 
 # Display the final result
