@@ -29,7 +29,7 @@ class CTable:
         winner = players[0] if len(players[0].pieces) == 0 else players[1]
         loser = players[0] if winner == players[1] else players[1]
 
-        print("\n=== Final Result === !!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print("\n=== Final Result ===")
         print(f"Player {winner.name} wins!")
         print(f"Player {loser.name}'s ({len(loser.pieces)}) remaining pieces: ", [f"[{p.front}|{p.back}]" for p in loser.pieces])
         print("Final table:", [f"[{d.back}|{d.front}]" for d in table.board])

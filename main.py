@@ -47,18 +47,20 @@ else:
 won = False
 round = 0 # odd rounds will be the first player, evens will be the second
 
+mutex_lock = threading.Lock()
+
 # Game loop
 while won == False:
     round += 1
     print(f"This round is player {(round+offset-1)%2+1}'s turn") # Announce who's turn it is
     if ((round+offset)%2) == 1:
         player = Player1
-        Player1Thread = threading.Thread(target=Player1.play, name="player1", args=(domino_game,))
+        Player1Thread = threading.Thread(target=Player1.play, name="player1", args=(domino_game, mutex_lock))
         result = Player1Thread.start()
-        Player1Thread.join()
+        Player1Thread.join() # Wait for thread to finish before continuing execution. The
     else:
         player = Player2
-        Player2Thread = threading.Thread(target=Player2.play, name="player2", args=(domino_game,))
+        Player2Thread = threading.Thread(target=Player2.play, name="player2", args=(domino_game, mutex_lock))
         Player2Thread.start()
         Player2Thread.join()
 
