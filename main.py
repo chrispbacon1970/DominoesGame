@@ -47,7 +47,7 @@ else:
 won = False
 round = 0 # odd rounds will be the first player, evens will be the second
 
-mutex_lock = threading.Lock()
+mutex_lock = threading.Lock() # create the Mutex
 
 # Game loop
 while won == False:
