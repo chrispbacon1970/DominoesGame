@@ -16,11 +16,12 @@ class CPlayer():
         for i in self.pieces: # Check available pieces
             if table.play_domino(i) == True: # If it can be played
                 self.pieces.remove(i) # 'Use up' the piece
+                if len(self.pieces) == 0:
+                    table.status = "Won"
+                    return "Won"  # won the game
                 return "Played" # Was able to play the piece
 
-        if len(self.pieces) == 0:
-            table.status = "Won"
-            return "Won" # won the game
+
 
         # If no working piece found in the deck, draw from boneyard until a working one is found
         dominoFound = False # has the piece been found?
@@ -33,3 +34,7 @@ class CPlayer():
                 return "Played"
             else: # If the drawn domino does not work, add it to the deck
                 self.pieces.append(new_domino)
+
+        if len(self.pieces) == 0:
+            table.status = "Won"
+            return "Won" # won the game
