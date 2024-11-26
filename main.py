@@ -7,8 +7,8 @@ print("=== Initializing Game ===")
 domino_game = CDominoes.CDominoes()
 domino_game.create_dominoes()
 
-Player1 = CPlayer.CPlayer()
-Player2 = CPlayer.CPlayer()
+Player1 = CPlayer.CPlayer("Player1")
+Player2 = CPlayer.CPlayer("Player2")
 
 Random = CRandom.CRandom()
 decks = Random.deal(domino_game)

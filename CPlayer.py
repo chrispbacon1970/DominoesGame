@@ -4,9 +4,10 @@ import random, CDominoes
 #Class CPlayer to select a randomly picked and sequentially
 #show the selected pieces.
 class CPlayer():
-    def __init__(self): # Initialization
+    def __init__(self, name): # Initialization
         self.pieces = []
         self.skipped = False
+        self.name = name
 
     def set_deck(self, deck): # Set the deck
         self.pieces = deck
