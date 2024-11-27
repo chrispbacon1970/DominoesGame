@@ -1,3 +1,5 @@
+# Authors: Bennett, Zachary, and Nathan
+
 import CTable, CDominoes, CPlayer, CRandom
 import threading
 
